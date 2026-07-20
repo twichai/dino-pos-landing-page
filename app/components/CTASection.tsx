@@ -44,10 +44,10 @@ export default function CTASection() {
         </AnimateOnScroll>
 
         <AnimateOnScroll delay={700}>
-          <p className="mt-16 flex items-center justify-center gap-1.5 text-xs text-violet-200/50">
+          <footer className="mt-16 flex items-center justify-center gap-1.5 text-xs text-violet-200/50">
             สร้างด้วย <Heart className="h-3 w-3 fill-dino-secondary text-dino-secondary" /> สำหรับร้านค้าขนาดเล็ก ·
             <span className="font-semibold">Dino POS © 2025</span>
-          </p>
+          </footer>
         </AnimateOnScroll>
       </div>
     </section>

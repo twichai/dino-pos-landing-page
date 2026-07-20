@@ -10,35 +10,35 @@ const SHOWCASE_ITEMS = [
     id: "home",
     label: "ขายหน้าร้าน",
     icon: ShoppingCart,
-    image: "/assets/home-screen.png",
+    image: "/assets/home-screen.webp",
     description: "หน้าจอ POS สำหรับคิดเงินหน้าร้าน ใช้งานง่าย รวดเร็ว",
   },
   {
     id: "stock",
     label: "จัดการสต็อก",
     icon: Package,
-    image: "/assets/stock.png",
+    image: "/assets/stock.webp",
     description: "ระบบเช็คและอัปเดตจำนวนสินค้าคงคลังแบบเรียลไทม์",
   },
   {
     id: "setting",
     label: "ตั้งค่าระบบ",
     icon: Settings,
-    image: "/assets/setting.png",
+    image: "/assets/setting.webp",
     description: "ปรับแต่งข้อมูลร้านค้าและสิทธิ์การใช้งานของพนักงาน",
   },
   {
     id: "receipt",
     label: "ตั้งค่าใบเสร็จ",
     icon: Receipt,
-    image: "/assets/receipt-setting.png",
+    image: "/assets/receipt-setting.webp",
     description: "ออกแบบหัว/ท้ายใบเสร็จและโลโก้ร้านตามต้องการ",
   },
   {
     id: "overview",
     label: "ภาพรวมระบบ",
     icon: LayoutGrid,
-    image: "/assets/sale-page.png",
+    image: "/assets/sale-page.webp",
     description: "หน้าต่างการทำงานหลักของ Dino POS",
   },
 ];
@@ -154,7 +154,7 @@ function DesktopMockup() {
           <Image
             key={activeItem.id}
             src={activeItem.image}
-            alt={activeItem.label}
+            alt={`Dino POS - ${activeItem.label} (${activeItem.description})`}
             fill
             sizes="(max-width: 1200px) 100vw, 800px"
             className="object-contain object-center p-1 sm:p-2 transition-opacity duration-300"
@@ -201,8 +201,8 @@ function TabletInner() {
       {/* Tablet top camera dot */}
       <div className="absolute top-1.5 left-1/2 -translate-x-1/2 h-1.5 w-1.5 rounded-full bg-slate-700 z-10" />
       <Image
-        src="/assets/sale-page.png"
-        alt="Dino POS Tablet"
+        src="/assets/sale-page.webp"
+        alt="Dino POS Tablet Edition - ระบบขายหน้าร้านรองรับแท็บเล็ต"
         fill
         sizes="(max-width: 768px) 100vw, 500px"
         className="object-cover object-top"
@@ -219,8 +219,8 @@ function MobileInner() {
         <div className="h-1 w-1 rounded-full bg-slate-600 ml-auto mr-2" />
       </div>
       <Image
-        src="/assets/sale-page-mobile.png"
-        alt="Dino POS Mobile Stock"
+        src="/assets/sale-page-mobile.webp"
+        alt="Dino POS Mobile Edition - ระบบเช็คสต็อกสินค้าบนมือถือ"
         fill
         sizes="(max-width: 768px) 100vw, 200px"
         className="object-cover object-top"

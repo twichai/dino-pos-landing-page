@@ -13,7 +13,7 @@ import { cn } from "../lib/utils";
  */
 type Variant = "hero" | "pointing" | "carrying" | "giving" | "sad" | "waving";
 
-const SRC = "/mascot.png";
+const SRC = "/mascot.webp";
 
 interface DinoCharacterProps {
   variant?: Variant;

@@ -32,9 +32,9 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Brand */}
-        <a href="#" className="flex items-center gap-2">
+        <a href="#" className="flex items-center gap-2" title="Dino POS — หน้าแรก">
           <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-dino-primary to-dino-secondary text-white shadow-md">
-            <Image src="/app_icon.webp" alt="Mascot" width={36} height={36} className="h-full w-full object-cover" />
+            <Image src="/app_icon.webp" alt="Dino POS Mascot Logo" width={36} height={36} className="h-full w-full object-cover" />
           </div>
           <span className="text-lg font-bold tracking-tight text-dino-dark">
             Dino <span className="text-dino-primary">POS</span>

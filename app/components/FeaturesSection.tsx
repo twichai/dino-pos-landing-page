@@ -7,8 +7,6 @@ import {
   Package,
   BarChart3,
   Landmark,
-  Users,
-  UtensilsCrossed,
   Printer,
   Cloud,
 } from "lucide-react";
