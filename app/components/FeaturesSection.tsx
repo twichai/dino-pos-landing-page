@@ -31,8 +31,8 @@ const FEATURES: Feature[] = [
   { icon: Package, label: "Inventory", desc: "จัดการสต็อก" },
   { icon: BarChart3, label: "Reports", desc: "รายงานขาย" },
   { icon: Landmark, label: "VAT", desc: "คำนวณภาษี" },
-  { icon: Users, label: "Employee", desc: "จัดการพนักงาน" },
-  { icon: UtensilsCrossed, label: "Kitchen", desc: "ส่ง order ครัว" },
+  // { icon: Users, label: "Employee", desc: "จัดการพนักงาน" },
+  // { icon: UtensilsCrossed, label: "Kitchen", desc: "ส่ง order ครัว" },
   { icon: Printer, label: "Printer", desc: "เชื่อมปริ้นเตอร์" },
   { icon: Cloud, label: "Cloud Backup", desc: "เสริมเมื่อต้องการ" },
 ];
