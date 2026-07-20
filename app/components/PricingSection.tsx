@@ -102,7 +102,7 @@ export default function PricingSection() {
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">เพิ่มเติมเมื่อต้องการ · จ่ายรายครั้ง</p>
                 </div>
-                <DinoCharacter variant="carrying" size={120} />
+                <DinoCharacter size={120} />
               </div>
 
               <ul className="mt-8 flex-1 space-y-4">
