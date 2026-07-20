@@ -1,5 +1,47 @@
-import { ShoppingCart, Package, BarChart3, Receipt, ScanLine, Users } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { ShoppingCart, Package, Settings, Receipt, LayoutGrid } from "lucide-react";
 import AnimateOnScroll from "./AnimateOnScroll";
+
+const SHOWCASE_ITEMS = [
+  {
+    id: "home",
+    label: "ขายหน้าร้าน",
+    icon: ShoppingCart,
+    image: "/assets/home-screen.png",
+    description: "หน้าจอ POS สำหรับคิดเงินหน้าร้าน ใช้งานง่าย รวดเร็ว",
+  },
+  {
+    id: "stock",
+    label: "จัดการสต็อก",
+    icon: Package,
+    image: "/assets/stock.png",
+    description: "ระบบเช็คและอัปเดตจำนวนสินค้าคงคลังแบบเรียลไทม์",
+  },
+  {
+    id: "setting",
+    label: "ตั้งค่าระบบ",
+    icon: Settings,
+    image: "/assets/setting.png",
+    description: "ปรับแต่งข้อมูลร้านค้าและสิทธิ์การใช้งานของพนักงาน",
+  },
+  {
+    id: "receipt",
+    label: "ตั้งค่าใบเสร็จ",
+    icon: Receipt,
+    image: "/assets/receipt-setting.png",
+    description: "ออกแบบหัว/ท้ายใบเสร็จและโลโก้ร้านตามต้องการ",
+  },
+  {
+    id: "overview",
+    label: "ภาพรวมระบบ",
+    icon: LayoutGrid,
+    image: "/assets/sale-page.png",
+    description: "หน้าต่างการทำงานหลักของ Dino POS",
+  },
+];
 
 export default function ProductShowcase() {
   return (
@@ -12,7 +54,7 @@ export default function ProductShowcase() {
         <div className="mb-16 text-center">
           <AnimateOnScroll>
             <span className="text-sm font-semibold uppercase tracking-widest text-dino-primary">
-              Product
+              Product Showcase
             </span>
           </AnimateOnScroll>
           <AnimateOnScroll delay={100}>
@@ -27,35 +69,27 @@ export default function ProductShowcase() {
           </AnimateOnScroll>
         </div>
 
-        {/* Main desktop mockup */}
+        {/* Main desktop mockup with interactive tabs */}
         <AnimateOnScroll variant="scale" delay={200}>
           <DesktopMockup />
         </AnimateOnScroll>
 
-        {/* Device trio */}
+        {/* Device duo */}
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-3">
-          <AnimateOnScroll variant="scale" delay={100}>
+          <AnimateOnScroll variant="scale" delay={100} className="sm:col-span-2">
             <DeviceCard
               label="Tablet"
               caption="ขายหน้าร้าน"
-              className="h-44"
+              className="h-[320px] sm:h-[380px]"
               inner={<TabletInner />}
             />
           </AnimateOnScroll>
-          <AnimateOnScroll variant="scale" delay={300}>
+          <AnimateOnScroll variant="scale" delay={300} className="sm:col-span-1">
             <DeviceCard
               label="Mobile"
               caption="เช็คสต็อก"
-              className="h-44"
+              className="h-[320px] sm:h-[380px]"
               inner={<MobileInner />}
-            />
-          </AnimateOnScroll>
-          <AnimateOnScroll variant="scale" delay={500}>
-            <DeviceCard
-              label="Desktop"
-              caption="ดูรายงาน"
-              className="h-44"
-              inner={<DesktopInner />}
             />
           </AnimateOnScroll>
         </div>
@@ -65,57 +99,67 @@ export default function ProductShowcase() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Main desktop mockup — full POS window                                      */
+/*  Main desktop mockup — full POS window with interactive screenshot tabs     */
 /* -------------------------------------------------------------------------- */
 function DesktopMockup() {
-  const tiles = [
-    { icon: ShoppingCart, label: "ขายสินค้า" },
-    { icon: Package, label: "สต็อก" },
-    { icon: BarChart3, label: "รายงาน" },
-    { icon: Receipt, label: "ใบเสร็จ" },
-    { icon: ScanLine, label: "Barcode" },
-    { icon: Users, label: "พนักงาน" },
-  ];
+  const [activeId, setActiveId] = useState("home");
+  const activeItem =
+    SHOWCASE_ITEMS.find((item) => item.id === activeId) || SHOWCASE_ITEMS[0];
 
   return (
     <div className="overflow-hidden rounded-2xl border border-violet-100 bg-white shadow-2xl">
       {/* Title bar */}
-      <div className="flex items-center gap-2 border-b border-violet-50 bg-violet-50/50 px-4 py-3">
-        <div className="h-3 w-3 rounded-full bg-red-400" />
-        <div className="h-3 w-3 rounded-full bg-yellow-400" />
-        <div className="h-3 w-3 rounded-full bg-green-400" />
-        <span className="ml-3 text-xs font-medium text-gray-400">Dino POS — ร้านค้าของฉัน</span>
+      <div className="flex items-center justify-between border-b border-violet-100 bg-violet-50/50 px-4 py-3">
+        <div className="flex items-center gap-2">
+          <div className="h-3 w-3 rounded-full bg-red-400" />
+          <div className="h-3 w-3 rounded-full bg-yellow-400" />
+          <div className="h-3 w-3 rounded-full bg-green-400" />
+          <span className="ml-3 text-xs font-medium text-gray-500">
+            Dino POS — {activeItem.label}
+          </span>
+        </div>
+        <span className="hidden text-xs font-medium text-gray-400 sm:inline-block">
+          {activeItem.description}
+        </span>
       </div>
 
       {/* Body */}
-      <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-[200px_1fr]">
-        {/* Sidebar */}
-        <div className="hidden flex-col gap-2 sm:flex">
-          {["หน้าหลัก", "ขาย", "สินค้า", "รายงาน", "ตั้งค่า"].map((item, i) => (
-            <div
-              key={item}
-              className={`rounded-lg px-3 py-2 text-xs font-medium ${
-                i === 0
-                  ? "bg-dino-primary text-white"
-                  : "text-gray-500 hover:bg-violet-50"
-              }`}
-            >
-              {item}
-            </div>
-          ))}
+      <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-[200px_1fr] sm:p-6">
+        {/* Sidebar tabs */}
+        <div className="flex flex-row gap-1.5 overflow-x-auto pb-2 sm:flex-col sm:overflow-x-visible sm:pb-0">
+          {SHOWCASE_ITEMS.map((item) => {
+            const Icon = item.icon;
+            const isActive = item.id === activeId;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveId(item.id)}
+                className={`flex items-center gap-2.5 whitespace-nowrap rounded-xl px-3.5 py-2.5 text-xs font-semibold transition-all duration-200 ${isActive
+                  ? "bg-dino-primary text-white shadow-md shadow-violet-500/20"
+                  : "text-gray-600 hover:bg-violet-50 hover:text-dino-primary"
+                  }`}
+              >
+                <Icon
+                  className={`h-4 w-4 ${isActive ? "text-white" : "text-dino-primary"
+                    }`}
+                />
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Tiles */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {tiles.map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center justify-center gap-2 rounded-xl border border-violet-50 bg-gradient-to-br from-violet-50 to-white p-4"
-            >
-              <Icon className="h-6 w-6 text-dino-primary" />
-              <span className="text-xs font-medium text-dino-dark">{label}</span>
-            </div>
-          ))}
+        {/* Screenshot preview area */}
+        <div className="relative min-h-[300px] w-full overflow-hidden rounded-xl border border-violet-100 bg-gray-900/5 shadow-inner sm:min-h-[440px]">
+          <Image
+            key={activeItem.id}
+            src={activeItem.image}
+            alt={activeItem.label}
+            fill
+            sizes="(max-width: 1200px) 100vw, 800px"
+            className="object-contain object-center p-1 sm:p-2 transition-opacity duration-300"
+            priority
+          />
         </div>
       </div>
     </div>
@@ -138,7 +182,9 @@ function DeviceCard({
 }) {
   return (
     <div className="flex flex-col items-center">
-      <div className={`flex w-full items-center justify-center rounded-2xl border border-violet-100 bg-gradient-to-br from-violet-50 to-white p-4 ${className}`}>
+      <div
+        className={`flex w-full items-center justify-center rounded-2xl border border-violet-100 bg-gradient-to-br from-violet-50 to-white p-4 ${className}`}
+      >
         {inner}
       </div>
       <div className="mt-4 text-center">
@@ -151,62 +197,34 @@ function DeviceCard({
 
 function TabletInner() {
   return (
-    <div className="flex h-full w-full max-w-[180px] flex-col gap-1.5 rounded-lg border border-violet-200 bg-white p-2">
-      <div className="flex items-center justify-between">
-        <span className="text-[8px] font-bold text-dino-primary">POS</span>
-        <ShoppingCart className="h-3 w-3 text-dino-primary" />
-      </div>
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="flex items-center gap-1 rounded bg-violet-50 px-1.5 py-1">
-          <Package className="h-2 w-2 text-dino-secondary" />
-          <div className="h-1 flex-1 rounded-full bg-violet-100" />
-          <span className="text-[7px] text-gray-400">฿{(i * 50)}</span>
-        </div>
-      ))}
-      <div className="mt-auto rounded bg-dino-primary px-2 py-1 text-center text-[8px] font-semibold text-white">
-        ชำระเงิน
-      </div>
+    <div className="relative w-full max-w-[480px] aspect-[16/10] overflow-hidden rounded-xl border-4 border-slate-800 bg-slate-900 shadow-xl transition-transform duration-300 hover:scale-[1.01]">
+      {/* Tablet top camera dot */}
+      <div className="absolute top-1.5 left-1/2 -translate-x-1/2 h-1.5 w-1.5 rounded-full bg-slate-700 z-10" />
+      <Image
+        src="/assets/sale-page.png"
+        alt="Dino POS Tablet"
+        fill
+        sizes="(max-width: 768px) 100vw, 500px"
+        className="object-cover object-top"
+      />
     </div>
   );
 }
 
 function MobileInner() {
   return (
-    <div className="flex h-full w-16 flex-col gap-1 rounded-xl border-2 border-violet-200 bg-white p-1.5">
-      <div className="mx-auto h-1 w-4 rounded-full bg-violet-200" />
-      <div className="mt-1 flex flex-col gap-1">
-        <div className="flex items-center gap-1 rounded bg-violet-50 px-1 py-0.5">
-          <Package className="h-2 w-2 text-dino-secondary" />
-          <div className="h-0.5 flex-1 rounded-full bg-violet-100" />
-        </div>
-        <div className="flex items-center gap-1 rounded bg-violet-50 px-1 py-0.5">
-          <Package className="h-2 w-2 text-dino-secondary" />
-          <div className="h-0.5 flex-1 rounded-full bg-violet-100" />
-        </div>
+    <div className="relative h-full max-h-[270px] sm:max-h-[300px] aspect-[9/19.5] overflow-hidden rounded-[24px] border-4 border-slate-800 bg-slate-900 shadow-xl transition-transform duration-300 hover:scale-[1.03]">
+      {/* Mobile camera notch / island */}
+      <div className="absolute top-1.5 left-1/2 -translate-x-1/2 h-2 w-10 rounded-full bg-slate-800 z-10 flex items-center justify-center">
+        <div className="h-1 w-1 rounded-full bg-slate-600 ml-auto mr-2" />
       </div>
-      <div className="mt-auto rounded bg-dino-primary px-1 py-0.5 text-center text-[6px] font-semibold text-white">
-        +
-      </div>
-    </div>
-  );
-}
-
-function DesktopInner() {
-  return (
-    <div className="flex h-full w-full max-w-[200px] flex-col gap-1.5 rounded-lg border border-violet-200 bg-white p-2">
-      <div className="flex items-center justify-between">
-        <BarChart3 className="h-3 w-3 text-dino-primary" />
-        <span className="text-[8px] font-semibold text-gray-500">รายงาน</span>
-      </div>
-      <div className="flex items-end gap-1">
-        {[40, 65, 50, 80, 70].map((h, i) => (
-          <div
-            key={i}
-            className="flex-1 rounded-t bg-gradient-to-t from-dino-primary to-dino-secondary"
-            style={{ height: `${h * 0.4}px` }}
-          />
-        ))}
-      </div>
+      <Image
+        src="/assets/sale-page-mobile.png"
+        alt="Dino POS Mobile Stock"
+        fill
+        sizes="(max-width: 768px) 100vw, 200px"
+        className="object-cover object-top"
+      />
     </div>
   );
 }
