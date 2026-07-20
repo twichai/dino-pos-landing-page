@@ -1,26 +1,178 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-noto-thai), var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Dino POS brand palette — Purple */
+  --color-dino-primary: #7C3AED;     /* violet-600 */
+  --color-dino-secondary: #A855F7;   /* purple-500 */
+  --color-dino-light: #F5F3FF;       /* violet-50 */
+  --color-dino-bg: #FAFAFA;          /* neutral-50 */
+  --color-dino-dark: #1E1B4B;        /* indigo-950 */
+  --color-dino-accent: #22C55E;      /* green — used sparingly */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #FAFAFA;
+  --foreground: #1E1B4B;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   Scroll-triggered animation base
+   ========================================================= */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.delay-100 { transition-delay: 100ms; }
+.animate-on-scroll.delay-200 { transition-delay: 200ms; }
+.animate-on-scroll.delay-300 { transition-delay: 300ms; }
+.animate-on-scroll.delay-400 { transition-delay: 400ms; }
+.animate-on-scroll.delay-500 { transition-delay: 500ms; }
+.animate-on-scroll.delay-600 { transition-delay: 600ms; }
+.animate-on-scroll.delay-700 { transition-delay: 700ms; }
+.animate-on-scroll.delay-800 { transition-delay: 800ms; }
+
+.animate-on-scroll.scale {
+  transform: scale(0.95) translateY(20px);
+}
+.animate-on-scroll.scale.is-visible {
+  transform: scale(1) translateY(0);
+}
+
+.animate-on-scroll.blur {
+  transform: translateY(20px);
+  filter: blur(8px);
+}
+.animate-on-scroll.blur.is-visible {
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* =========================================================
+   Keyframe animations
+   ========================================================= */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-22px) rotate(2deg); }
+}
+
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  93%, 97% { transform: scaleY(0.1); }
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+.animate-blob { animation: blob 18s ease-in-out infinite; }
+.animate-blink { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+.animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+
+/* =========================================================
+   Utilities
+   ========================================================= */
+/* Animated gradient text */
+.text-gradient {
+  background: linear-gradient(120deg, #7C3AED 0%, #A855F7 50%, #7C3AED 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Section background helpers */
+.section-bg-white { background-color: #FFFFFF; }
+.section-bg-light { background-color: #F5F3FF; }
+.section-bg-dark { background-color: #1E1B4B; }
+.section-bg-base { background-color: #FAFAFA; }
+
+/* Text color utilities */
+.text-dino-primary { color: #7C3AED; }
+.text-dino-secondary { color: #A855F7; }
+.text-dino-dark { color: #1E1B4B; }
+.text-dino-accent { color: #22C55E; }
+
+.bg-dino-primary { background-color: #7C3AED; }
+.bg-dino-secondary { background-color: #A855F7; }
+.bg-dino-light { background-color: #F5F3FF; }
+.bg-dino-dark { background-color: #1E1B4B; }
+
+.border-dino-primary { border-color: #7C3AED; }
+
+/* Gradient button glow */
+.glow-primary {
+  box-shadow: 0 10px 40px -10px rgba(124, 58, 237, 0.5);
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-slow,
+  .animate-blob,
+  .animate-blink,
+  .animate-bounce-slow,
+  .text-gradient {
+    animation: none;
+  }
+  html { scroll-behavior: auto; }
 }
