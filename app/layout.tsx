@@ -81,8 +81,16 @@ export const metadata: Metadata = {
       "POS สำหรับร้านค้าขนาดเล็ก ใช้ฟรีตลอดชีพ ไม่มีค่าธรรมเนียมรายเดือน จ่ายเฉพาะบริการ Cloud ที่คุณต้องการ",
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/app_icon.webp",
+    icon: [
+      { url: "/app_icon.webp", type: "image/webp" },
+      { url: "/app_icon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/app_icon.webp",
+    apple: [
+      { url: "/app_icon.webp", type: "image/webp" },
+      { url: "/app_icon.png", type: "image/png" },
+    ],
   },
 };
 
