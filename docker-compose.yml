@@ -1,0 +1,15 @@
+name: dino-pos-landing-page
+
+services:
+  app:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER:-twichai}/dino-pos-landing-page:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dino-pos-landing-page
+    restart: always
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
