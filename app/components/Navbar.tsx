@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { cn } from "../lib/utils";
@@ -32,8 +33,8 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Brand */}
         <a href="#" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-dino-primary to-dino-secondary text-white shadow-md">
-            <DinoMark className="h-5 w-5" />
+          <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-dino-primary to-dino-secondary text-white shadow-md">
+            <Image src="/app_icon.webp" alt="Mascot" width={36} height={36} className="h-full w-full object-cover" />
           </div>
           <span className="text-lg font-bold tracking-tight text-dino-dark">
             Dino <span className="text-dino-primary">POS</span>
@@ -98,15 +99,5 @@ export default function Navbar() {
         </div>
       )}
     </header>
-  );
-}
-
-/* Small geometric dino mark for the brand badge */
-function DinoMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3 14c0-1 1-2 2-2 1-3 4-5 7-5s6 2 7 5c1 0 2 1 2 2v3c0 1-1 2-2 2h-1c0 1-1 2-2 2h-2c-1 0-2-1-2-2v-2H9v2c0 1-1 2-2 2H5c-1 0-2-1-2-2v-3z" />
-      <circle cx="15" cy="9" r="1.2" fill="white" />
-    </svg>
   );
 }

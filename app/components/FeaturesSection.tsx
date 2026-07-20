@@ -73,13 +73,17 @@ export default function FeaturesSection() {
               variant="scale"
               delay={Math.min((i % 4) * 100, 400)}
             >
-              <div className="group flex h-full flex-col gap-3 rounded-2xl border border-violet-100 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-violet-300 hover:shadow-lg">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-purple-100 transition-colors group-hover:from-dino-primary group-hover:to-dino-secondary">
-                  <f.icon className="h-5 w-5 text-dino-primary transition-colors group-hover:text-white" />
+              <div className="group flex h-full flex-col gap-3 rounded-2xl border border-violet-100 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-violet-300 hover:bg-violet-50/30 hover:shadow-lg">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-purple-100 transition-all duration-300">
+                  <f.icon className="h-5 w-5 text-dino-primary transition-colors duration-300" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-dino-dark">{f.label}</p>
-                  <p className="text-xs text-gray-400">{f.desc}</p>
+                  <p className="text-sm font-semibold text-dino-dark transition-colors duration-300 group-hover:text-dino-primary">
+                    {f.label}
+                  </p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-gray-500">
+                    {f.desc}
+                  </p>
                 </div>
               </div>
             </AnimateOnScroll>
